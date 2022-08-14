@@ -2,9 +2,9 @@ from typing import Dict
 
 from .mispar import hechrechi, gadol
 
-class Mispar():
-    '''A Mispar is a class that converts words into numbers
-    '''
+
+class Mispar:
+    """A Mispar is a class that converts words into numbers"""
 
     def __init__(self):
         self.mapping: Dict[str, int] = {}
@@ -22,18 +22,18 @@ class Mispar():
                 self.print_bad_letter_msg(letter)
         return value
 
-class MisparHechrechi(Mispar):
 
+class MisparHechrechi(Mispar):
     def __init__(self):
         self.mapping: Dict[str, int] = hechrechi()
 
-class MisparGadol(Mispar):
 
+class MisparGadol(Mispar):
     def __init__(self):
         self.mapping: Dict[str, int] = gadol()
 
-class MisparhaAkhor(Mispar):
 
+class MisparhaAkhor(Mispar):
     def __init__(self):
         self.mapping: Dict[str, int] = hechrechi()
 

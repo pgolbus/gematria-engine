@@ -1,5 +1,6 @@
 from typing import Dict
 
+
 def hechrechi() -> Dict[str, int]:
     return {
         "א": 1,
@@ -28,8 +29,9 @@ def hechrechi() -> Dict[str, int]:
         "ק": 100,
         "ר": 200,
         "ש": 300,
-        "ת": 400
+        "ת": 400,
     }
+
 
 def gadol() -> Dict[str, int]:
     gadol = hechrechi()

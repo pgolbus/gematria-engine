@@ -38,3 +38,11 @@ def test_haakhor(word: str) -> None:
     '''
     mispar: MisparhaAkhor = MisparhaAkhor()
     assert mispar.mispar(word) == 110015
+
+def test_bad_word(capsys) -> None:
+    bad_word: str = "ארץh"
+    mispar: MisparHechrechi = MisparHechrechi()
+    value: int = mispar.mispar(bad_word)
+    assert value == 291
+    captured = capsys.readouterr()
+    assert captured.out.strip() == 'I don\'t recognize "h". Skipping it'

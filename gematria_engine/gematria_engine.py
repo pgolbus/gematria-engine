@@ -6,6 +6,9 @@ class Mispar():
     '''A Mispar is a class that converts words into numbers
     '''
 
+    def __init__(self):
+        self.mapping: Dict[str, int] = {}
+
     def print_bad_letter_msg(self, letter: str) -> None:
         print(f'I don\'t recognize "{letter}". Skipping it')
 

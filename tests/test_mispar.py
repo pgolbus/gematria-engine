@@ -9,6 +9,12 @@ def word() -> str:
     return "הארץ"
 
 
+@pytest.fixture
+def bad_word() -> str:
+    """HaAretz: land"""
+    return "haארץ"
+
+
 def test_hechrechi(word: str) -> None:
     """ה = 5
     1 = א
@@ -42,10 +48,37 @@ def test_haakhor(word: str) -> None:
     assert mispar.mispar(word) == 110015
 
 
-def test_bad_word(capsys) -> None:
-    bad_word: str = "ארץh"
+def test_bad_word(bad_word) -> None:
     mispar: MisparHechrechi = MisparHechrechi()
-    value: int = mispar.mispar(bad_word)
-    assert value == 291
-    captured = capsys.readouterr()
-    assert captured.out.strip() == 'I don\'t recognize "h". Skipping it'
+    with pytest.raises(ValueError, match=f'I don\'t recognize "h" in {bad_word}'):
+        mispar.mispar(bad_word)
+
+
+def test_bad_word_strip(bad_word) -> None:
+    """meh = h
+    meh = a
+    1 = א
+    ר = 200
+    ץ = 90
+    -> 291
+    """
+    mispar: MisparHechrechi = MisparHechrechi(strip=True)
+    assert mispar.mispar(bad_word) == 291
+
+
+def test_bad_word_haakhor(bad_word) -> None:
+    mispar: MisparhaAkhor = MisparhaAkhor()
+    with pytest.raises(ValueError, match=f'I don\'t recognize "h" in {bad_word}'):
+        mispar.mispar(bad_word)
+
+
+def test_bad_word_strip_haakhor(bad_word) -> None:
+    """meh = h
+    meh = a
+    10^0 * 1 = א
+    10^1 * 200 = ר
+    10^2 * ץ = 90
+    -> 11,001
+    """
+    mispar: MisparhaAkhor = MisparhaAkhor(strip=True)
+    assert mispar.mispar(bad_word) == 11001

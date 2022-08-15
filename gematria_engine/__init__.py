@@ -1,1 +1,1 @@
-from .gematria_engine import Mishpar, MisparHechrechi, MisparGadol, MisparhaAkhor
+from .gematria_engine import Mispar, MisparHechrechi, MisparGadol, MisparhaAkhor
